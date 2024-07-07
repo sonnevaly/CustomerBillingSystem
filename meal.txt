@@ -1,0 +1,10 @@
+101 Chicken_Sandwich 5.00
+102 Cheese_Burger 6.00
+103 Egg_Fried_Rice 3.00
+104 Japanese_Ramen 12.00
+105 Burrito 12.00
+106 Omelet 10.00
+107 Beefsteak 25.00
+108 LokLak_Beef	5.00
+109 Khor_Pork 1.50
+110 FishSoup 2.00
