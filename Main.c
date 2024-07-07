@@ -7,6 +7,7 @@ typedef struct menulist{
     float price;
 }menu;
 
+/*BC zin*/
 menu m;
 
 void menul();
