@@ -31,6 +31,11 @@ int main(){
             case 1:
                 menul();
                 break;
+
+            case 2:
+                order();
+                break;
+                
             case 4:
                 exit(8);
         }
@@ -102,68 +107,37 @@ void menul(){
     return;
 }
 
+// Valy
+void order() {
+    system("cls");
+    menul(); 
 
+    char customerName[50];
+    char phoneNumber[15];
+    int id, quantity;
 
+    // Ask for the customer's name and phone number
+    printf("\n\nEnter your name: ");
+    fgets(customerName, sizeof(customerName), stdin);
+    customerName[strcspn(customerName, "\n")] = 0; 
 
+    printf("Enter your phone number: ");
+    fgets(phoneNumber, sizeof(phoneNumber), stdin);
+    phoneNumber[strcspn(phoneNumber, "\n")] = 0; 
 
-// void menul(){
-    
-//     system("cls");
-//     FILE *p1;
-    
-//     p1= fopen("meal.txt", "r");
-//     if (p1 == NULL) {
-//         printf("Error opening meal.txt\n");
-//         return;
-//     }
-//     // p2= fopen("drink.txt", "rb");
-//     // p3= fopen("desert.txt", "rb");
-//     printf("\t\t%-10s %-20s %-10s","ID","Name","Price");
-//     printf("\n\t\t____________________________________________________________________________\n");
-    
-//     while(fread(&m,sizeof(m),1,p1)==1){
-//         printf("\t\t%-10d %-20s %-10.2f\n", m.id, m.pname, m.price);
-//     }
-    
-//     fclose(p1);
-//     // fclose(p2);
-//     // fclose(p3);
-// }
+    FILE *fp1, *fp2, *fp3;
+    fp1 = fopen("meal.txt", "r");
+    fp2 = fopen("drink.txt", "r");
+    fp3 = fopen("desert.txt", "r");
 
+    if (fp1 == NULL || fp2 == NULL || fp3 == NULL) {
+        printf("Error opening menu files.\n");
+        return;
+    }
 
-// void menul() {
-//     FILE *p1;
-//     system("cls");
-    
-    
-
-//     printf("\t\t------------------------------------------------------------\n");
-//     printf("\t\t%-10s %-20s %-10s\n", "ID", "Name", "Price");
-//     printf("\t\t------------------------------------------------------------\n");
-//     p1 = fopen("meal.txt", "rb");
-//     // if (p1 == NULL) {
-//     //     printf("Error opening meal.dat\n");
-//     //     return;
-//     // }
-//     while (fread(&m, sizeof(m), 1, p1) == 1) {
-//         printf("\t\t%-10d %-20s %-10.2f\n", m.id, m.pname, m.price);
-//     }
-
-//     fclose(p1);
-// }
-
-// void Additem(){
-//     system("cls");
-//     FILE *fp;
-//     fp=fopen("drink.txt", "ab");
-//     printf("Enter Item id: ");
-//     scanf("%d", &m.id);
-//     printf("Enter Item name: ");
-//     fflush(stdin);
-//     gets(m.pname);
-//     printf("Enter the Price: ");
-//     fflush(stdin);
-//     scanf("%d", &m.price);
-//     fwrite(&m,sizeof(m),1,fp);
-//     fclose(fp);
-// }
+    // Initialize variables for order processing
+    int totalItems = 0;
+    float totalPrice = 0.0;
+    int found = 0;
+    char buffer[200];
+}
