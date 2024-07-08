@@ -57,7 +57,7 @@ void menul(char *file_name){
     
     
     printf("\t\t____________________________________________________________________________\n");
-    printf("\t\t%-20s %-40s %-10s","ID","Name","Price");
+    printf("\t\t %-20s %-40s %-10s","ID","Name","Price");
     printf("\n\t\t____________________________________________________________________________\n");
 
     
@@ -65,9 +65,10 @@ void menul(char *file_name){
         menu m;
         fgets(buffer, 200, fp);
         sscanf(buffer,"%d %s %f", &m.id, &m.pname, &m.price);
-        printf("\t\t%-20d %-40s %-7.2f$\n", m.id, m.pname, m.price);
+        printf("\t\t %-20d %-40s %-7.2f$\n", m.id, m.pname, m.price);
     }while(!feof(fp));
 
+    printf("\t\t____________________________________________________________________________\n");
 }
 
 // Valy
