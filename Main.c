@@ -133,15 +133,32 @@ void order() {
         while(1){
             printf("\n\t\tInter ID to order: ");
             scanf("%d", &id);
+            printf("\n\t\tHow many would you like: ");
+            scanf("%d", &quantity);
             printf("\n\t\tDo you like to order more?(y/n) ");
             scanf(" %c", &stop);
-            if(stop=='n'||stop=='N')
-            break;
+            if(stop=='n'||stop=='N'){
+                break;
+            }else if(stop=='y'||stop=='Y'){
+                continue;
+            }else{
+                printf("\n\t\tNot valid!");
+                printf("\n\t\tDo you like to order more?(y/n) ");
+                scanf(" %c", &stop);
+            }
+            
         }
         printf("\n\t\tDo you like to order anything else?(y/n) ");
         scanf(" %c", &stop);
-        if(stop=='n'||stop=='N')
-        break;
+        if(stop=='n'||stop=='N'){
+            break;
+        }else if(stop=='y'||stop=='Y'){
+            continue;
+        }else{
+            printf("\n\t\tNot valid!");
+            printf("\n\t\tDo you like to order anything else?(y/n) ");
+            scanf(" %c", &stop);
+        }
     }
     
     
