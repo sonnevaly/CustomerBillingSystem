@@ -38,6 +38,10 @@ int main(){
                 
             case 4:
                 exit(8);
+                break;
+            default:
+                printf("Not valid!");
+                getchar();
         }
     }while(ch!=4);
     return 0;
