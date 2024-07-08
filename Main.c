@@ -101,11 +101,19 @@ void order() {
         return;
     }
 
-    // Initialize variables for order processing
+    typedef struct {
+    char name[50];
+    int quantity;
+    float price;
+    } OrderItem;
+
+    OrderItem orders[100];
+    int orderCount = 0;
     int totalItems = 0;
     float totalPrice = 0.0;
     int found = 0;
     char buffer[200];
+
 
     while(1){
         system("cls");
@@ -131,10 +139,12 @@ void order() {
                 break; 
         }
         while(1){
-            printf("\n\t\tInter ID to order: ");
+            printf("\n\t\tEnter ID to order: ");
             scanf("%d", &id);
             printf("\n\t\tHow many would you like: ");
             scanf("%d", &quantity);
+
+           
             printf("\n\t\tDo you like to order more?(y/n) ");
             scanf(" %c", &stop);
             if(stop=='n'||stop=='N'){
@@ -159,11 +169,24 @@ void order() {
             printf("\n\t\tDo you like to order anything else?(y/n) ");
             scanf(" %c", &stop);
         }
+    }    
+
+    // Display receipt
+    printf("\n\t\tReceipt\n");
+    printf("\t\t=====================================\n");
+    printf("\t\tCustomer: %s\n", customerName);
+    printf("\t\tPhone: %s\n", phoneNumber);
+    printf("\t\t-------------------------------------\n");
+    for (int i = 0; i < orderCount; i++) {
+        printf("\t\t%s x%d - $%.2f\n", orders[i].name, orders[i].quantity, orders[i].price);
     }
-    
-    
+    printf("\t\t-------------------------------------\n");
+    printf("\t\tTotal items ordered: %d\n", totalItems);
+    printf("\t\tTotal price: $%.2f\n", totalPrice);
+    printf("\t\t=====================================\n");
+
 
     printf("\n\n\t\t");
     system("pause");
 
-} 
+}
