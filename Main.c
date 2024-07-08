@@ -118,11 +118,11 @@ void order() {
         switch (menu){
             case 1:
                 printf("\n\t\t                                   /MEAL/                                   \n");
-                menul("drink.txt");
+                menul("meal.txt");
                 break;
             case 2:
                 printf("\n\t\t                                   /DRINK/                                   \n");
-                menul("meal.txt");
+                menul("drink.txt");
                 break;
             case 3:
                 printf("\n\t\t                                  /DESERT/                                  \n");
