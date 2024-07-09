@@ -37,8 +37,8 @@ int main(){
                 exit(8);
                 break;
             default:
-                printf("\t\tNot valid!");
-                getchar();
+                printf("\t\tNot valid!\n\n\t\t");
+                system("pause");
         }
     }while(ch!=3);
     return 0;
