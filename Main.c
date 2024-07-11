@@ -18,9 +18,9 @@ typedef struct {
     char name[50];
     char date[20];
     char phone[11];
-    itemorder item[100];
+    itemorder *item;
     int totalitm;
-    int total;
+    float total;
 }orders;
 
 void menul(char *file_name);
@@ -91,7 +91,7 @@ void menul(char *file_name){
 void order() {
     system("cls");
     orders ord;
-    int i=0;
+    int i=0, sizeitem;
     ord.totalitm=0;
     ord.total=0;
     FILE *fp1, *fp2, *fp3;
@@ -149,13 +149,11 @@ void order() {
                         {
                             fgets(buffer, 200, fp1);
                             sscanf(buffer,"%d %s %f", &temp.id, &temp.pname, &temp.price);
-                            printf("%d %s", temp.id, temp.pname);
 
                             if(temp.id == ord.item[i].id){
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
-                                printf("%d %s", ord.item[i].id, ord.item[i].pname);
                                 i++;
                                 break;
                             }
@@ -164,7 +162,7 @@ void order() {
                         scanf("%d", &ord.item[i-1].quantity);
 
                         ord.totalitm += ord.item[i-1].quantity; 
-                    
+                        ord.total += ord.item[i-1].quantity *  ord.item[i-1].price;
                         printf("\n\t\tDo you like to order more?(y/n) ");
                         scanf(" %c", &stop);
                         if(stop=='n'||stop=='N'){
@@ -191,18 +189,17 @@ void order() {
                         {
                             fgets(buffer, 200, fp2);
                             sscanf(buffer,"%d %s %f", &temp.id, &temp.pname, &temp.price);
-                            printf("%d %s", temp.id, temp.pname);
                             if(temp.id == ord.item[i].id){
-                                strcpy(ord.item[i].pname, temp.pname);
+                                strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
+                                ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
                                 i++;
                             }
                         }
                         printf("\n\t\tHow many would you like: ");
                         scanf("%d", &ord.item[i-1].quantity);
-
                         ord.totalitm += ord.item[i-1].quantity; 
-                    
+                        ord.total += ord.item[i-1].quantity *  ord.item[i-1].price;
                         printf("\n\t\tDo you like to order more?(y/n) ");
                         scanf(" %c", &stop);
                         if(stop=='n'||stop=='N'){
@@ -230,16 +227,16 @@ void order() {
                             fgets(buffer, 200, fp3);
                             sscanf(buffer,"%d %s %f", &temp.id, &temp.pname, &temp.price);
                             if(temp.id == ord.item[i].id){
-                                strcpy(ord.item[i].pname, temp.pname);
+                                strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
+                                ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
                                 i++;
                             }
                         }
                         printf("\n\t\tHow many would you like: ");
                         scanf("%d", &ord.item[i-1].quantity);
-
                         ord.totalitm += ord.item[i-1].quantity; 
-                    
+                        ord.total += ord.item[i-1].quantity *  ord.item[i-1].price;
                         printf("\n\t\tDo you like to order more?(y/n) ");
                         scanf(" %c", &stop);
                         if(stop=='n'||stop=='N'){
@@ -273,26 +270,31 @@ void order() {
     fclose(fp2);
     fclose(fp3);
 
+    sizeitem = sizeof(ord.item)/sizeof(ord.item[0]);
     // Display receipt
     system("cls");
-    printf("\n\t\tReceipt\n");
-    printf("\t\t==================================================\n");
-    printf("\t\t%-30s %s\n","Customer:", ord.name);
-    printf("\t\t%-30s %s\n","Phone:", ord.phone);
-    printf("\t\t--------------------------------------------------\n");
-    for(int i=0; i<3; i++){
-        printf("\t\t%-30s\t%d\t%.2f\n", ord.item[i].pname, ord.item[i].quantity, ord.item[i].price);
+    printf("\n\t\t\t\tReceipt\n");
+    printf("\t\t=====================================================\n");
+    printf("\t\t %-30s %s\n","Customer:", ord.name);
+    printf("\t\t %-30s %s\n","Phone:", ord.phone);
+    printf("\t\t-----------------------------------------------------\n");
+    printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
+    printf("\t\t-----------------------------------------------------\n");
+    for(int i=0; i<sizeitem; i++){
+        printf("\t\t %-30s %-15d %-5.2f\n", ord.item[i].pname, ord.item[i].quantity, ord.item[i].price);
     }
     
     // for (int i = 0; i < orderCount; i++) {
     //     printf("\t\t%s x%d - $%.2f\n", orders[i].name, orders[i].quantity, orders[i].price);
     // }
-    printf("\t\t--------------------------------------------------\n");
-    printf("\t\t%-30s %d\n","Total items ordered:", ord.totalitm);
-    printf("\t\t%-30s $%.2f\n", "Total price:", ord.total);
-    printf("\t\t==================================================\n");
-    printf("%d", i);
+    printf("\t\t-----------------------------------------------------\n");
+    printf("\t\t %-30s %-15d %-5.2f\n","Total:", ord.totalitm, ord.total);
+    printf("\t\t=====================================================\n");
 
+    FILE *fp;
+    fp = fopen("order.txt", "ab");
+    fwrite(&ord, sizeof(orders), 1, fp);
+    fclose(fp);
     printf("\n\n\t\t");
     system("pause");
 
