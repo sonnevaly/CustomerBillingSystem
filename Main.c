@@ -281,7 +281,7 @@ void order() {
     printf("\t\t%-30s %s\n","Phone:", ord.phone);
     printf("\t\t--------------------------------------------------\n");
     for(int i=0; i<3; i++){
-        printf("\t\t%-30s\t%d\t%.2f\n", ord.item[0].pname, ord.item[0].quantity, ord.item[0].price);
+        printf("\t\t%-30s\t%d\t%.2f\n", ord.item[i].pname, ord.item[i].quantity, ord.item[i].price);
     }
     
     // for (int i = 0; i < orderCount; i++) {
