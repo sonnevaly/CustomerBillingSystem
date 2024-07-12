@@ -153,12 +153,10 @@ void order() {
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
                         scanf("%d", &ord.item[i].id);
-                        while (!feof(fp1))
-                        {
+                        while (!feof(fp1)){
                             fgets(buffer, 200, fp1);
                             sscanf(buffer,"%d %s %f", &temp.id, &temp.pname, &temp.price);
 
-                            }
                             if(temp.id == ord.item[i].id){
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
