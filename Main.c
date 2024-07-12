@@ -297,9 +297,7 @@ void order() {
         }
     }
 
-    fclose(fp1);
-    fclose(fp2);
-    fclose(fp3);
+    
 
     // Display receipt
     system("cls");
@@ -320,6 +318,10 @@ void order() {
     printf("\t\t=====================================================\n");
 
     fclose(fp);
+    fclose(fp1);
+    fclose(fp2);
+    fclose(fp3);
+    
     printf("\n\n\t\t");
     system("pause");
 
