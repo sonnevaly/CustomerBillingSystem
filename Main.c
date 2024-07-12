@@ -315,14 +315,10 @@ void order() {
         printf("\t\t %-30s %-15d %-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
     }
     
-     for (int i = 0; i < orderCount; i++) {
-        printf("\t\t%s x%d - $%.2f\n", orders[i].name, orders[i].quantity, orders[i].price);
-     }
     printf("\t\t-----------------------------------------------------\n");
     printf("\t\t %-30s %-15d %-5.2f\n","Total:", ord.totalitm, ord.total);
     printf("\t\t=====================================================\n");
 
-    fwrite(&ord, sizeof(orders), 1, fp);
     fclose(fp);
     printf("\n\n\t\t");
     system("pause");
