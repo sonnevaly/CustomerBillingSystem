@@ -91,7 +91,7 @@ void menul(char *file_name){
 void order() {
     system("cls");
     orders ord;
-    int i=0;
+    int i=0, itemcount=0;
     ord.totalitm=0;
     ord.total=0;
     FILE *fp, *fp1, *fp2, *fp3;
@@ -99,6 +99,11 @@ void order() {
     fp1 = fopen("meal.txt", "r");
     fp2 = fopen("drink.txt", "r");
     fp3 = fopen("desert.txt", "r");
+
+    if (fp == NULL) {
+        printf("Error opening order file.\n");
+        return;
+    }
 
     if (fp1 == NULL || fp2 == NULL || fp3 == NULL) {
         printf("Error opening menu files.\n");
@@ -110,11 +115,11 @@ void order() {
     printf("\n\t\t__________________________________________________________________________________________________\n\n");
     // Ask for the customer's name and phone number
     printf("\n\n\t\tEnter your name: ");
-    fgets(ord.name, sizeof(orders), stdin);
+    fgets(ord.name, sizeof(ord.name), stdin);
     ord.name[strcspn(ord.name, "\n")] = 0; 
     
     printf("\t\tEnter your phone number: ");
-    fgets(ord.phone, sizeof(orders), stdin);
+    fgets(ord.phone, sizeof(ord.phone), stdin);
     ord.phone[strcspn(ord.phone, "\n")] = 0; 
 
     
@@ -142,7 +147,7 @@ void order() {
                 printf("\n\t\t                                   /MEAL/                                   \n");
                 menul("meal.txt");
                 while(1){
-                        con_loop1: continue;
+                        // con_loop1:
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -156,19 +161,15 @@ void order() {
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
-                                i++;
                                 break;
-                            }else{
-                                printf("\nDoesn't exist!!\n\n");
-                                getchar();
-                                goto con_loop2;
                             }
                         }
                         printf("\n\t\tHow many would you like: ");
-                        scanf("%d", &ord.item[i-1].quantity);
+                        scanf("%d", &ord.item[i].quantity);
 
-                        ord.totalitm += ord.item[i-1].quantity; 
-                        ord.total += ord.item[i-1].quantity *  ord.item[i-1].price;
+                        ord.totalitm += ord.item[i].quantity; 
+                        ord.total += ord.item[i].quantity *  ord.item[i].price;
+                        i++;
                         printf("\n\t\tDo you like to order more?(y/n) ");
                         scanf(" %c", &stop);
                         if(stop=='n'||stop=='N'){
@@ -180,6 +181,7 @@ void order() {
                             printf("\n\t\tDo you like to order more?(y/n) ");
                             scanf(" %c", &stop);
                         }
+                        
                     
                 }
                 break;
@@ -187,7 +189,7 @@ void order() {
                 printf("\n\t\t                                   /DRINK/                                   \n");
                 menul("drink.txt");
                 while(1){
-                        con_loop2: continue;
+                        // con_loop2:
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -200,17 +202,14 @@ void order() {
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
-                                i++;
-                            }else{
-                                printf("\nDoesn't exist!!\n\n");
-                                getchar();
-                                goto con_loop2;
+                                
                             }
                         }
                         printf("\n\t\tHow many would you like: ");
-                        scanf("%d", &ord.item[i-1].quantity);
-                        ord.totalitm += ord.item[i-1].quantity; 
-                        ord.total += ord.item[i-1].quantity *  ord.item[i-1].price;
+                        scanf("%d", &ord.item[i].quantity);
+                        ord.totalitm += ord.item[i].quantity; 
+                        ord.total += ord.item[i].quantity *  ord.item[i].price;
+                        i++;
                         printf("\n\t\tDo you like to order more?(y/n) ");
                         scanf(" %c", &stop);
                         if(stop=='n'||stop=='N'){
@@ -222,6 +221,7 @@ void order() {
                             printf("\n\t\tDo you like to order more?(y/n) ");
                             scanf(" %c", &stop);
                         }
+                        
                     
                 }
                 break;
@@ -229,7 +229,7 @@ void order() {
                 printf("\n\t\t                                  /DESERT/                                  \n");
                 menul("desert.txt");
                 while(1){
-                        con_loop3: continue;
+                        // con_loop3:
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -242,17 +242,14 @@ void order() {
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
-                                i++;
-                            }else{
-                                printf("\nDoesn't exist!!\n\n");
-                                system("pause");
-                                goto con_loop3;
+                                
                             }
                         }
                         printf("\n\t\tHow many would you like: ");
-                        scanf("%d", &ord.item[i-1].quantity);
-                        ord.totalitm += ord.item[i-1].quantity; 
-                        ord.total += ord.item[i-1].quantity *  ord.item[i-1].price;
+                        scanf("%d", &ord.item[i].quantity);
+                        ord.totalitm += ord.item[i].quantity; 
+                        ord.total += ord.item[i].quantity *  ord.item[i].price;
+                        i++;
                         printf("\n\t\tDo you like to order more?(y/n) ");
                         scanf(" %c", &stop);
                         if(stop=='n'||stop=='N'){
@@ -264,6 +261,7 @@ void order() {
                             printf("\n\t\tDo you like to order more?(y/n) ");
                             scanf(" %c", &stop);
                         }
+                        
                     
                 }
                 break;
@@ -281,14 +279,15 @@ void order() {
             printf("\n\t\tDo you like to order anything else?(y/n) ");
             scanf(" %c", &stop);
         }
-    }    
+    }
+
     fclose(fp1);
     fclose(fp2);
     fclose(fp3);
 
     // Display receipt
     system("cls");
-    printf("%d", i);
+    printf("i is %d", i);
     printf("\n\t\t\t\tReceipt\n");
     printf("\t\t=====================================================\n");
     printf("\t\t %-30s %s\n","Customer:", ord.name);
@@ -296,7 +295,7 @@ void order() {
     printf("\t\t-----------------------------------------------------\n");
     printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
     printf("\t\t-----------------------------------------------------\n");
-    for(int j=0; j<i-1; j++){
+    for(int j=0; j<i; j++){
         printf("\t\t %-30s %-15d %-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
     }
     
