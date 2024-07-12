@@ -121,11 +121,11 @@ void order() {
     ord.phone[strcspn(ord.phone, "\n")] = 0; 
 
     
-    // int orderCount = 0;
-    // int totalItems = 0;
-    // float totalPrice = 0.0;
-    // int found = 0;
-    // char buffer[200];
+    int orderCount = 0;
+    int totalItems = 0;
+    float totalPrice = 0.0;
+    int found = 0;
+    char buffer[200];
 
 
     while(1){
@@ -281,7 +281,7 @@ void order() {
                     
                 }
                 break;
-            default:
+                default:
                 continue;
         }
         printf("\n\t\tDo you like to order anything else?(y/n) ");
@@ -315,9 +315,9 @@ void order() {
         printf("\t\t %-30s %-15d %-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
     }
     
-    // for (int i = 0; i < orderCount; i++) {
-    //     printf("\t\t%s x%d - $%.2f\n", orders[i].name, orders[i].quantity, orders[i].price);
-    // }
+     for (int i = 0; i < orderCount; i++) {
+        printf("\t\t%s x%d - $%.2f\n", orders[i].name, orders[i].quantity, orders[i].price);
+     }
     printf("\t\t-----------------------------------------------------\n");
     printf("\t\t %-30s %-15d %-5.2f\n","Total:", ord.totalitm, ord.total);
     printf("\t\t=====================================================\n");
@@ -328,3 +328,4 @@ void order() {
     system("pause");
 
 }
+
