@@ -301,7 +301,6 @@ void order() {
 
     // Display receipt
     system("cls");
-    printf("i is %d", i);
     printf("\n\t\t\t\tReceipt\n");
     printf("\t\t=====================================================\n");
     printf("\t\t %-30s %s\n","Customer:", ord.name);
@@ -321,7 +320,7 @@ void order() {
     fclose(fp1);
     fclose(fp2);
     fclose(fp3);
-    
+
     printf("\n\n\t\t");
     system("pause");
 
