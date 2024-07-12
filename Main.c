@@ -148,6 +148,7 @@ void order() {
                 menul("meal.txt");
                 while(1){
                         // con_loop1:
+                        int found=0;
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -157,12 +158,18 @@ void order() {
                             fgets(buffer, 200, fp1);
                             sscanf(buffer,"%d %s %f", &temp.id, &temp.pname, &temp.price);
 
+                            }
                             if(temp.id == ord.item[i].id){
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
+                                found=1;
                                 break;
                             }
+                        }
+                        if (!found){
+                            printf("\n\t\tThis is not existed!\n");
+                            continue;
                         }
                         printf("\n\t\tHow many would you like: ");
                         scanf("%d", &ord.item[i].quantity);
@@ -190,6 +197,7 @@ void order() {
                 menul("drink.txt");
                 while(1){
                         // con_loop2:
+                        int found=0;
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -202,8 +210,12 @@ void order() {
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
-                                
+                                found=1;
                             }
+                        }
+                        if (!found){
+                            printf("\n\t\tThis is not existed!\n");
+                            continue;
                         }
                         printf("\n\t\tHow many would you like: ");
                         scanf("%d", &ord.item[i].quantity);
@@ -230,6 +242,7 @@ void order() {
                 menul("desert.txt");
                 while(1){
                         // con_loop3:
+                        int found=0;
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -242,8 +255,12 @@ void order() {
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
-                                
+                                found=1;
                             }
+                        }
+                        if (!found){
+                            printf("\n\t\tThis is not existed!\n");
+                            continue;
                         }
                         printf("\n\t\tHow many would you like: ");
                         scanf("%d", &ord.item[i].quantity);
