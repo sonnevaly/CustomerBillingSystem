@@ -142,7 +142,6 @@ void order() {
                 printf("\n\t\t                                   /MEAL/                                   \n");
                 menul("meal.txt");
                 while(1){
-                        con_loop1: continue;
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -158,10 +157,6 @@ void order() {
                                 ord.item[i].price = temp.price;
                                 i++;
                                 break;
-                            }else{
-                                printf("\nDoesn't exist!!\n\n");
-                                getchar();
-                                goto con_loop2;
                             }
                         }
                         printf("\n\t\tHow many would you like: ");
@@ -187,7 +182,6 @@ void order() {
                 printf("\n\t\t                                   /DRINK/                                   \n");
                 menul("drink.txt");
                 while(1){
-                        con_loop2: continue;
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -201,10 +195,6 @@ void order() {
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
                                 i++;
-                            }else{
-                                printf("\nDoesn't exist!!\n\n");
-                                getchar();
-                                goto con_loop2;
                             }
                         }
                         printf("\n\t\tHow many would you like: ");
@@ -229,7 +219,6 @@ void order() {
                 printf("\n\t\t                                  /DESERT/                                  \n");
                 menul("desert.txt");
                 while(1){
-                        con_loop3: continue;
                         char buffer[200];
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
@@ -243,10 +232,6 @@ void order() {
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
                                 i++;
-                            }else{
-                                printf("\nDoesn't exist!!\n\n");
-                                system("pause");
-                                goto con_loop3;
                             }
                         }
                         printf("\n\t\tHow many would you like: ");
