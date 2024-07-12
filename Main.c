@@ -96,9 +96,7 @@ void order() {
     ord.total=0;
     FILE *fp, *fp1, *fp2, *fp3;
     fp = fopen("order.txt", "ab");
-    fp1 = fopen("meal.txt", "r");
-    fp2 = fopen("drink.txt", "r");
-    fp3 = fopen("desert.txt", "r");
+
 
     if (fp == NULL) {
         printf("Error opening order file.\n");
@@ -153,11 +151,12 @@ void order() {
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
                         scanf("%d", &ord.item[i].id);
+                        fp1 = fopen("meal.txt", "r");
                         while (!feof(fp1)){
                             fgets(buffer, 200, fp1);
                             sscanf(buffer,"%d %s %f", &temp.id, &temp.pname, &temp.price);
 
-                            if(temp.id == ord.item[i].id){
+                            if(temp.id == ord.item[i].id){   
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
                                 ord.item[i].price = temp.price;
@@ -166,7 +165,7 @@ void order() {
                             }
                         }
                         if (!found){
-                            printf("\n\t\tThis is not existed!\n");
+                            printf("\n\t\tThis is not existed!");
                             continue;
                         }
                         printf("\n\t\tHow many would you like: ");
@@ -200,6 +199,7 @@ void order() {
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
                         scanf("%d", &ord.item[i].id);
+                        fp2 = fopen("drink.txt", "r");
                         while (!feof(fp2))
                         {
                             fgets(buffer, 200, fp2);
@@ -212,7 +212,7 @@ void order() {
                             }
                         }
                         if (!found){
-                            printf("\n\t\tThis is not existed!\n");
+                            printf("\n\t\tThis is not existed!");
                             continue;
                         }
                         printf("\n\t\tHow many would you like: ");
@@ -245,6 +245,7 @@ void order() {
                         char stop;
                         printf("\n\t\tEnter ID to order: ");
                         scanf("%d", &ord.item[i].id);
+                        fp3 = fopen("desert.txt", "r");
                         while (!feof(fp3))
                         {
                             fgets(buffer, 200, fp3);
@@ -257,7 +258,7 @@ void order() {
                             }
                         }
                         if (!found){
-                            printf("\n\t\tThis is not existed!\n");
+                            printf("\n\t\tThis is not existed!");
                             continue;
                         }
                         printf("\n\t\tHow many would you like: ");
