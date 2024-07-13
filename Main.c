@@ -91,7 +91,8 @@ void menul(char *file_name){
 void order() {
     system("cls");
     orders ord;
-    int i=0, itemcount=0;
+    int i=0, itemcount=0, size = sizeof(ord.item)/sizeof(ord.item[0]);
+    printf("%d", size);
     ord.totalitm=0;
     ord.total=0;
     FILE *fp, *fp1, *fp2, *fp3;
@@ -155,6 +156,15 @@ void order() {
                         while (!feof(fp1)){
                             fgets(buffer, 200, fp1);
                             sscanf(buffer,"%d %s %f", &temp.id, &temp.pname, &temp.price);
+                            for(int j=0; j<size; j++){
+                                for (int k = 0; k < j; k++)
+                                {
+                                    if (ord.item[j].id == ord.item[k].id)
+                                    {
+                                        ord.item[j]+=ord.item[k].quantity;
+                                    }
+                                }
+                            }
 
                             if(temp.id == ord.item[i].id){   
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
@@ -301,19 +311,19 @@ void order() {
 
     // Display receipt
     system("cls");
-    printf("\n\t\t\t\tReceipt\n");
+    printf("\n\t\ttReceipt\n");
     printf("\t\t=====================================================\n");
-    printf("\t\t %-30s %s\n","Customer:", ord.name);
-    printf("\t\t %-30s %s\n","Phone:", ord.phone);
+    printf("\t\t %-20s %s\n","Customer:", ord.name);
+    printf("\t\t %-20s %s\n","Phone:", ord.phone);
     printf("\t\t-----------------------------------------------------\n");
     printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
     printf("\t\t-----------------------------------------------------\n");
     for(int j=0; j<i; j++){
-        printf("\t\t %-30s %-15d %-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
+        printf("\t\t %-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
     }
     
     printf("\t\t-----------------------------------------------------\n");
-    printf("\t\t %-30s %-15d %-5.2f\n","Total:", ord.totalitm, ord.total);
+    printf("\t\t %-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
     printf("\t\t=====================================================\n");
 
     fclose(fp);
