@@ -156,16 +156,6 @@ void order() {
                         while (!feof(fp1)){
                             fgets(buffer, 200, fp1);
                             sscanf(buffer,"%d %s %f", &temp.id, &temp.pname, &temp.price);
-                            for(int j=0; j<size; j++){
-                                for (int k = 0; k < j; k++)
-                                {
-                                    if (ord.item[j].id == ord.item[k].id)
-                                    {
-                                        ord.item[j]+=ord.item[k].quantity;
-                                    }
-                                }
-                            }
-
                             if(temp.id == ord.item[i].id){   
                                 strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
                                 ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
