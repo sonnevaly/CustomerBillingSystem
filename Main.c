@@ -1,18 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-typedef struct menulist{
+typedef struct {
     int id;
     char pname[50]; /*Product name*/
     float price;
-}menu;
+}itemmenu;
 
-menu m;
+typedef struct {
+    int id;
+    char pname[50]; /*Product name*/
+    int quantity;
+    float price;
+}itemorder;
+
+typedef struct {
+    char name[50];
+    char date[20];
+    char phone[11];
+    itemorder item[100];
+    int totalitm;
+    float total;
+}orders;
 
 void menul(char *file_name);
+void oper(char *file_name); //Operation
 void order();
 void disphis(); /*display history*/
-void Additem();
+
 
 int main(){
     int ch = 0;
@@ -46,6 +61,7 @@ int main(){
 
 
 void menul(char *file_name){
+    itemmenu m;
     FILE *fp;
     fp=fopen(file_name, "r");
 
@@ -62,7 +78,6 @@ void menul(char *file_name){
 
     
     do{
-        menu m;
         fgets(buffer, 200, fp);
         sscanf(buffer,"%d %s %f", &m.id, &m.pname, &m.price);
         printf("\t\t %-20d %-40s %-7.2f$\n", m.id, m.pname, m.price);
@@ -71,32 +86,10 @@ void menul(char *file_name){
     printf("\t\t____________________________________________________________________________\n");
 }
 
+
 // Valy
 void order() {
     system("cls");
-
-    char stop;
-    int menu;
-    char customerName[50];
-    char phoneNumber[15];
-    int id, quantity;
-
-    printf("\n\t\t                                   =======>PLEASE ORDER<=======                                   \n\n");
-    printf("\n\t\t__________________________________________________________________________________________________\n\n");
-    // Ask for the customer's name and phone number
-    printf("\n\n\t\tEnter your name: ");
-    fgets(customerName, sizeof(customerName), stdin);
-    customerName[strcspn(customerName, "\n")] = 0; 
-
-    printf("\t\tEnter your phone number: ");
-    fgets(phoneNumber, sizeof(phoneNumber), stdin);
-    phoneNumber[strcspn(phoneNumber, "\n")] = 0; 
-
-    FILE *fp1, *fp2, *fp3;
-    fp1 = fopen("meal.txt", "r");
-    fp2 = fopen("drink.txt", "r");
-    fp3 = fopen("desert.txt", "r");
-
     orders ord;
     int i=0, itemcount=0;
     ord.totalitm=0;
@@ -105,21 +98,29 @@ void order() {
     fp = fopen("order.txt", "ab");
 
 
+    if (fp == NULL) {
+        printf("Error opening order file.\n");
+        return;
+    }
 
     if (fp1 == NULL || fp2 == NULL || fp3 == NULL) {
         printf("Error opening menu files.\n");
         return;
     }
 
-    typedef struct {
-    char name[50];
-    int quantity;
-    float price;
-    } OrderItem;
+    
+    printf("\n\t\t                                   =======>PLEASE ORDER<=======                                   \n\n");
+    printf("\n\t\t__________________________________________________________________________________________________\n\n");
+    // Ask for the customer's name and phone number
+    printf("\n\n\t\tEnter your name: ");
+    fgets(ord.name, sizeof(ord.name), stdin);
+    ord.name[strcspn(ord.name, "\n")] = 0; 
+    
+    printf("\t\tEnter your phone number: ");
+    fgets(ord.phone, sizeof(ord.phone), stdin);
+    ord.phone[strcspn(ord.phone, "\n")] = 0; 
 
-
-    OrderItem orders[100];
-
+    
     int orderCount = 0;
     int totalItems = 0;
     float totalPrice = 0.0;
@@ -128,19 +129,21 @@ void order() {
 
 
     while(1){
+        itemmenu temp; //To store data temperary
         system("cls");
         char stop;
+        int menu;
         printf("\n\t\t                                   =======>PLEASE ORDER<=======                                   ");
         printf("\n\t\t__________________________________________________________________________________________________\n\n");
         printf("\n\t\tWhat would you like to order?");
-        printf("\n\t\t(1) MEAL\t(2) DRINK\t(3) DESERT\n\t\t");
+        printf("\n\t\t(1) MEAL\t(2) DRINK\t(3) DESERT\n");
+        printf("\t\tChoose Menu to order: ");
         scanf("%d", &menu);
 
         switch (menu){
             case 1:
                 printf("\n\t\t                                   /MEAL/                                   \n");
                 menul("meal.txt");
-
                 while(1){
                         // con_loop1:
                         int found=0;
@@ -189,7 +192,6 @@ void order() {
             case 2:
                 printf("\n\t\t                                   /DRINK/                                   \n");
                 menul("drink.txt");
-
                 while(1){
                         // con_loop2:
                         int found=0;
@@ -236,20 +238,6 @@ void order() {
             case 3:
                 printf("\n\t\t                                  /DESERT/                                  \n");
                 menul("desert.txt");
-                break; 
-        }
-        while(1){
-            printf("\n\t\tEnter ID to order: ");
-            scanf("%d", &id);
-            printf("\n\t\tHow many would you like: ");
-            scanf("%d", &quantity);
-
-           
-            printf("\n\t\tDo you like to order more?(y/n) ");
-            scanf(" %c", &stop);
-            if(stop=='n'||stop=='N'){
-                break;
-            }else if(stop=='y'||stop=='Y'){
                 while(1){
                         // con_loop3:
                         int found=0;
@@ -295,12 +283,6 @@ void order() {
                 break;
                 default:
                 continue;
-            }else{
-                printf("\n\t\tNot valid!");
-                printf("\n\t\tDo you like to order more?(y/n) ");
-                scanf(" %c", &stop);
-            }
-            
         }
         printf("\n\t\tDo you like to order anything else?(y/n) ");
         scanf(" %c", &stop);
@@ -313,22 +295,22 @@ void order() {
             printf("\n\t\tDo you like to order anything else?(y/n) ");
             scanf(" %c", &stop);
         }
-    }    
+    }
+
+    
 
     // Display receipt
-    printf("\n\t\tReceipt\n");
-    printf("\t\t=====================================\n");
-    printf("\t\tCustomer: %s\n", customerName);
-    printf("\t\tPhone: %s\n", phoneNumber);
-    printf("\t\t-------------------------------------\n");
-    for (int i = 0; i < orderCount; i++) {
-        printf("\t\t%s x%d - $%.2f\n", orders[i].name, orders[i].quantity, orders[i].price);
+    system("cls");
+    printf("\n\t\t\t\tReceipt\n");
+    printf("\t\t=====================================================\n");
+    printf("\t\t %-30s %s\n","Customer:", ord.name);
+    printf("\t\t %-30s %s\n","Phone:", ord.phone);
+    printf("\t\t-----------------------------------------------------\n");
+    printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
+    printf("\t\t-----------------------------------------------------\n");
+    for(int j=0; j<i; j++){
+        printf("\t\t %-30s %-15d %-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
     }
-    printf("\t\t-------------------------------------\n");
-    printf("\t\tTotal items ordered: %d\n", totalItems);
-    printf("\t\tTotal price: $%.2f\n", totalPrice);
-    printf("\t\t=====================================\n");
-
     
     printf("\t\t-----------------------------------------------------\n");
     printf("\t\t %-30s %-15d %-5.2f\n","Total:", ord.totalitm, ord.total);
@@ -343,4 +325,3 @@ void order() {
     system("pause");
 
 }
-
