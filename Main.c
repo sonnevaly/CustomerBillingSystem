@@ -46,8 +46,9 @@ int main(){
             case 1:
                 order();
                 break;
-            // case 2:
-                    
+            case 2:
+                disphis();
+                break;
             case 3:
                 exit(8);
                 break;
@@ -330,5 +331,29 @@ void order() {
 void disphis(){
     orders ord;
     FILE *fp;
-    fp=fopen("order")
+    fp=fopen("order.txt", "r");
+    if (fp == NULL) {
+        printf("Error opening order file.\n");
+        return;
+    }
+
+
+    while(fread(&ord, sizeof(orders), 1, fp)){
+        system("cls");
+        printf("\n\t\tReceipt\n");
+        printf("\t\t=====================================================\n");
+        printf("\t\t %-20s %s\n","Customer:", ord.name);
+        printf("\t\t %-20s %s\n","Phone:", ord.phone);
+        printf("\t\t-----------------------------------------------------\n");
+        printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
+        printf("\t\t-----------------------------------------------------\n");
+        for(int j=0; j<100; j++){
+            printf("\t\t %-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
+        }
+        
+        printf("\t\t-----------------------------------------------------\n");
+        printf("\t\t %-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
+        printf("\t\t=====================================================\n");
+    }
+    fclose(fp);
 }
