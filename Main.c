@@ -326,3 +326,9 @@ void order() {
     system("pause");
 
 }
+
+void disphis(){
+    orders ord;
+    FILE *fp;
+    fp=fopen("order")
+}
