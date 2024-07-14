@@ -35,7 +35,7 @@ int main(){
         system("cls");
         printf("\t\t============================================================================\n");
         printf("\t\t=============================== /THE 3 SHOP/ ===============================\n");
-        printf("\t\t============================================================================\n\n");
+        printf("\t\t============================================================================\n");
         printf("\t\t____________________________________________________________________________\n\n");
         printf("\t\tMainMenu:\n\n");
         printf("\t\t1. Add Order\n\t\t2. History\n\t\t3. Exit\n");
@@ -96,7 +96,7 @@ void order() {
     ord.totalitm=0;
     ord.total=0;
     FILE *fp, *fp1, *fp2, *fp3;
-    fp = fopen("order.txt", "ab");
+    fp = fopen("order.txt", "a");
 
 
     if (fp == NULL) {
@@ -301,7 +301,7 @@ void order() {
 
     // Display receipt
     system("cls");
-    printf("\n\t\ttReceipt\n");
+    printf("\n\t\tReceipt\n");
     printf("\t\t=====================================================\n");
     printf("\t\t %-20s %s\n","Customer:", ord.name);
     printf("\t\t %-20s %s\n","Phone:", ord.phone);
@@ -316,6 +316,7 @@ void order() {
     printf("\t\t %-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
     printf("\t\t=====================================================\n");
 
+    fwrite(&ord, sizeof(ord), 1, fp);
     fclose(fp);
     fclose(fp1);
     fclose(fp2);
