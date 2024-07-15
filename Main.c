@@ -21,6 +21,7 @@ typedef struct {
     itemorder item[100];
     int totalitm;
     float total;
+    int itemcount;
 }orders;
 
 void menul(char *file_name);
@@ -97,7 +98,7 @@ void order() {
     ord.totalitm=0;
     ord.total=0;
     FILE *fp, *fp1, *fp2, *fp3;
-    fp = fopen("order.txt", "a");
+    fp = fopen("order.txt", "ab");
 
 
     if (fp == NULL) {
@@ -302,6 +303,7 @@ void order() {
 
     // Display receipt
     system("cls");
+    ord.itemcount=i;
     printf("\n\t\tReceipt\n");
     printf("\t\t=====================================================\n");
     printf("\t\t %-20s %s\n","Customer:", ord.name);
@@ -309,7 +311,7 @@ void order() {
     printf("\t\t-----------------------------------------------------\n");
     printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
     printf("\t\t-----------------------------------------------------\n");
-    for(int j=0; j<i; j++){
+    for(int j=0; j<ord.itemcount; j++){
         printf("\t\t %-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
     }
     
@@ -331,7 +333,7 @@ void order() {
 void disphis(){
     orders ord;
     FILE *fp;
-    fp=fopen("order.txt", "r");
+    fp=fopen("order.txt", "rb");
     if (fp == NULL) {
         printf("Error opening order file.\n");
         return;
@@ -347,7 +349,7 @@ void disphis(){
         printf("\t\t-----------------------------------------------------\n");
         printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
         printf("\t\t-----------------------------------------------------\n");
-        for(int j=0; j<100; j++){
+        for(int j=0; j<ord.itemcount; j++){
             printf("\t\t %-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
         }
         
