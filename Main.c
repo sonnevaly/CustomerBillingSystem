@@ -25,7 +25,7 @@ typedef struct {
 }orders;
 
 void menul(char *file_name);
-void oper(char *file_name); //Operation
+// void additem();
 void order();
 void disphis(); /*display history*/
 void searchhis();
@@ -36,26 +36,44 @@ int main(){
     int h_opt;
     do{
         system("cls");
-        printf("\t\t============================================================================\n");
-        printf("\t\t=============================== /THE 3 SHOP/ ===============================\n");
-        printf("\t\t============================================================================\n");
+        printf("\t\t-------------------------------==============-------------------------------\n");
+        printf("\t\t===============================  THE 3 SHOP  ===============================\n");
+        printf("\t\t-------------------------------==============-------------------------------\n");
         printf("\t\t____________________________________________________________________________\n\n");
-        printf("\t\tMainMenu:\n\n");
-        printf("\t\t1. Add Order\n\t\t2. History\n\t\t3. Exit\n");
-        printf("\n\t\tEnter your choice: "); 
+        printf("\t\t MainMenu:\n\n");
+        printf("\t\t (1) Add Order\n\t\t (2) Add Item\n\t\t (3) Display Menu\n\t\t (4) History\n\t\t (5) Exit\n");
+        printf("\n\t\t Enter your choice: "); 
         scanf("%d", &ch);
         fflush(stdin);
         switch(ch){
             case 1:
                 order();
                 break;
-            case 2:
+            // case 2:
+            //     additem();
+            //     break;
+            case 3:
+                system("cls");
+                printf("\n\t\t                            =======>Menu<=======                            \n");
+                printf("\t\t____________________________________________________________________________\n");
+                printf("\n\t\t____________________________________________________________________________\n");
+                printf("\t\t                                   |MEAL|                                   \n");
+                menul("meal.txt");
+                printf("\n\t\t____________________________________________________________________________\n");
+                printf("\t\t                                  |DRINK|                                   \n");
+                menul("drink.txt");
+                printf("\n\t\t____________________________________________________________________________\n");
+                printf("\t\t                                  |DESERT|                                  \n");
+                menul("desert.txt");
+                system("pause");
+                break;
+            case 4:
                 do{
                     system("cls");
-                    printf("\n\t\t                                     =======>History<=======                                      \n\n");
-                    printf("\n\t\t__________________________________________________________________________________________________\n\n");
-                    printf("\t\tHistory Optios:\n\n\t\t(1) Display History\n\t\t(2) Search History\n\t\t(3) Delete History\n\t\t(4) Exit\n");
-                    printf("\t\tInput option: ");
+                    printf("\n\t\t                                     =======>History<=======                                      \n");
+                    printf("\t\t__________________________________________________________________________________________________\n\n");
+                    printf("\t\t History Optios:\n\n\t\t (1) Display History\n\t\t (2) Search History\n\t\t (3) Delete History\n\t\t (4) Exit\n");
+                    printf("\t\t Input option: ");
                     scanf("%d", &h_opt);
                     fflush(stdin);
                     switch (h_opt)
@@ -75,14 +93,14 @@ int main(){
                     }
                 }while (h_opt!=4);
                 break;
-            case 3:
+            case 5:
                 exit(8);
                 break;
             default:
                 printf("\t\tNot valid!\n\n\t\t");
                 system("pause");
         }
-    }while(ch!=3);
+    }while(ch!=5);
     return 0;
 }
 
@@ -358,7 +376,7 @@ void disphis(){
 
     system("cls");
     while(fread(&ord, sizeof(orders), 1, fp)){
-        printf("\n\t\tReceipt %d\n", r_num);
+        printf("\n\t\t                       Receipt %d\n", r_num);
         r_num++;
         printf("\t\t========================================================\n");
         printf("\t\t%-20s %s\n","Customer:", ord.name);
@@ -373,7 +391,7 @@ void disphis(){
         printf("\t\t--------------------------------------------------------\n");
         printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
         printf("\t\t========================================================\n\n");
-        printf("\t\t--------------------------------------------------------\n\n");
+        printf("\t------------------------------------------------------------------------\n\n");
     }
     fclose(fp);
     system("pause");
@@ -381,53 +399,69 @@ void disphis(){
 
 }
 void searchhis(){
-    orders ord;
-    char name[50], phone[11];
-    int r_num=1;
-
-    FILE *fp;
-    fp=fopen("order.txt", "rb");
-    if (fp == NULL) {
-        printf("Error opening order file.\n");
-        return;
-    }
-    printf("\t\tInput customer information:\n");
-    printf("\t\t--------------------------------------------------------\n");
-    printf("\t\tInput the customer name: ");
-    fgets(name, sizeof(name), stdin);
-    name[strcspn(name, "\n")] = 0;  
-    printf("\t\tInput the customer phone number: ");
-    
-    fgets(phone, sizeof(phone), stdin);
-    phone[strcspn(phone, "\n")] = 0;
-    system("cls");
-    while(fread(&ord, sizeof(orders), 1, fp)){
-        if (!strcmp(ord.phone, phone) || !strcmp(ord.name, name))
-        {
-            printf("\n\t\tReceipt %d\n", r_num);
-            printf("\t\t========================================================\n");
-            printf("\t\t%-20s %s\n","Customer:", ord.name);
-            printf("\t\t%-20s %s\n","Phone:", ord.phone);
-            printf("\t\t--------------------------------------------------------\n");
-            printf("\t\t%-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
-            printf("\t\t--------------------------------------------------------\n");
-            for(int j=0; j<ord.itemcount; j++){
-                printf("\t\t%-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
-            }
-            
-            printf("\t\t--------------------------------------------------------\n");
-            printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
-            printf("\t\t========================================================\n\n");
-            printf("\t\t--------------------------------------------------------\n\n");
-        }else
-        {
-            printf("\t\tNot existed!\n");
-            system("pause");
+    while(1){
+        system("cls");
+        orders ord;
+        char name[50], phone[11];
+        int r_num=1, found=0;
+        char stop;
+        
+        FILE *fp;
+        fp=fopen("order.txt", "rb");
+        if (fp == NULL) {
+            printf("Error opening order file.\n");
+            return;
         }
-        r_num++;
+
+        printf("\t\tInput customer information:\n");
+        printf("\t\t--------------------------------------------------------\n");
+        printf("\t\tInput the customer name:");
+        fgets(name, sizeof(name), stdin);
+        name[strcspn(name, "\n")] = 0;
+
+        printf("\t\tInput the customer phone number:");
+        fgets(phone, sizeof(phone), stdin);
+        phone[strcspn(phone, "\n")] = 0;
+        system("cls");
+
+        while(fread(&ord, sizeof(orders), 1, fp)){
+            if (!strcmp(ord.phone, phone) || !strcmp(ord.name, name))
+            {
+                printf("\n\t\t                       Receipt %d\n", r_num);
+                printf("\t\t========================================================\n");
+                printf("\t\t%-20s %s\n","Customer:", ord.name);
+                printf("\t\t%-20s %s\n","Phone:", ord.phone);
+                printf("\t\t--------------------------------------------------------\n");
+                printf("\t\t%-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
+                printf("\t\t--------------------------------------------------------\n");
+                for(int j=0; j<ord.itemcount; j++){
+                    printf("\t\t%-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
+                }
+                
+                printf("\t\t--------------------------------------------------------\n");
+                printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
+                printf("\t\t========================================================\n\n");
+                printf("\t\t--------------------------------------------------------\n\n");
+                found=1;  
+            }
+            r_num++;
+        }
+        fclose(fp);
+        if (!found)
+        {
+            printf("Not existed!\n");
+            system("pause");
+            break;
+        }
+        printf("\n\t\tDo you want to search again?(y/n) ");
+        scanf(" %c", &stop);
+        fflush(stdin);
+        if(stop=='n'||stop=='N'){
+            break;
+        }else if(stop=='y'||stop=='Y'){
+            continue;
+        }        
     }
-            
-    fclose(fp);
-    system("pause");
+    
 
 }
