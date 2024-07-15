@@ -339,9 +339,8 @@ void disphis(){
         return;
     }
 
-
+    system("cls");
     while(fread(&ord, sizeof(orders), 1, fp)){
-        system("cls");
         printf("\n\t\tReceipt\n");
         printf("\t\t=====================================================\n");
         printf("\t\t %-20s %s\n","Customer:", ord.name);
@@ -358,4 +357,5 @@ void disphis(){
         printf("\t\t=====================================================\n");
     }
     fclose(fp);
+    system("pause");
 }
