@@ -157,6 +157,8 @@ void order() {
         printf("\n\t\tWhat would you like to order?");
         printf("\n\t\t(1) MEAL\t(2) DRINK\t(3) DESERT\n");
         printf("\t\tChoose Menu to order: ");
+        scanf("%d", &menu);
+        
         switch (menu){
             case 1:
                 printf("\n\t\t                                   /MEAL/                                   \n");
