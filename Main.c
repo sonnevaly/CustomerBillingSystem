@@ -28,6 +28,7 @@ void menul(char *file_name);
 void oper(char *file_name); //Operation
 void order();
 void disphis(); /*display history*/
+void searchhis();
 
 
 int main(){
@@ -141,7 +142,6 @@ void order() {
         printf("\n\t\tWhat would you like to order?");
         printf("\n\t\t(1) MEAL\t(2) DRINK\t(3) DESERT\n");
         printf("\t\tChoose Menu to order: ");
-        scanf("%d", &menu);
 
         switch (menu){
             case 1:
@@ -305,19 +305,19 @@ void order() {
     system("cls");
     ord.itemcount=i;
     printf("\n\t\tReceipt\n");
-    printf("\t\t=====================================================\n");
-    printf("\t\t %-20s %s\n","Customer:", ord.name);
-    printf("\t\t %-20s %s\n","Phone:", ord.phone);
-    printf("\t\t-----------------------------------------------------\n");
-    printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
-    printf("\t\t-----------------------------------------------------\n");
+    printf("\t\t========================================================\n");
+    printf("\t\t%-20s %s\n","Customer:", ord.name);
+    printf("\t\t%-20s %s\n","Phone:", ord.phone);
+    printf("\t\t--------------------------------------------------------\n");
+    printf("\t\t%-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
+    printf("\t\t--------------------------------------------------------\n");
     for(int j=0; j<ord.itemcount; j++){
-        printf("\t\t %-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
+        printf("\t\t%-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
     }
     
-    printf("\t\t-----------------------------------------------------\n");
-    printf("\t\t %-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
-    printf("\t\t=====================================================\n");
+    printf("\t\t--------------------------------------------------------\n");
+    printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
+    printf("\t\t========================================================\n");
 
     fwrite(&ord, sizeof(ord), 1, fp);
     fclose(fp);
@@ -332,6 +332,7 @@ void order() {
 
 void disphis(){
     orders ord;
+    int r_num=1;
     FILE *fp;
     fp=fopen("order.txt", "rb");
     if (fp == NULL) {
@@ -341,23 +342,62 @@ void disphis(){
 
     system("cls");
     while(fread(&ord, sizeof(orders), 1, fp)){
-        printf("\n\t\tReceipt\n");
-        printf("\t\t=====================================================\n");
-        printf("\t\t %-20s %s\n","Customer:", ord.name);
-        printf("\t\t %-20s %s\n","Phone:", ord.phone);
-        printf("\t\t-----------------------------------------------------\n");
-        printf("\t\t %-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
-        printf("\t\t-----------------------------------------------------\n");
+        printf("\n\t\tReceipt %d\n", r_num);
+        r_num++;
+        printf("\t\t========================================================\n");
+        printf("\t\t%-20s %s\n","Customer:", ord.name);
+        printf("\t\t%-20s %s\n","Phone:", ord.phone);
+        printf("\t\t--------------------------------------------------------\n");
+        printf("\t\t%-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
+        printf("\t\t--------------------------------------------------------\n");
         for(int j=0; j<ord.itemcount; j++){
-            printf("\t\t %-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
+            printf("\t\t%-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
         }
         
-        printf("\t\t-----------------------------------------------------\n");
-        printf("\t\t %-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
-        printf("\t\t=====================================================\n");
+        printf("\t\t--------------------------------------------------------\n");
+        printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
+        printf("\t\t========================================================\n\n");
+        printf("\t\t--------------------------------------------------------\n\n");
     }
     fclose(fp);
     system("pause");
 
+
+}
+void searchhis(){
+    orders ord;
+    int r_num=1;
+    FILE *fp;
+    fp=fopen("order.txt", "rb");
+    if (fp == NULL) {
+        printf("Error opening order file.\n");
+        return;
+    }
+
+    system("cls");
+    while(fread(&ord, sizeof(orders), 1, fp)){
+        if ()
+        {
+            printf("\n\t\tReceipt %d\n", r_num);
+            printf("\t\t========================================================\n");
+            printf("\t\t%-20s %s\n","Customer:", ord.name);
+            printf("\t\t%-20s %s\n","Phone:", ord.phone);
+            printf("\t\t--------------------------------------------------------\n");
+            printf("\t\t%-30s %-15s %-5s\n","Item_Name", "Quantity","Price");
+            printf("\t\t--------------------------------------------------------\n");
+            for(int j=0; j<ord.itemcount; j++){
+                printf("\t\t%-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
+            }
+            
+            printf("\t\t--------------------------------------------------------\n");
+            printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
+            printf("\t\t========================================================\n\n");
+            printf("\t\t--------------------------------------------------------\n\n");
+        }
+        r_num++;
+    }
+            
+    fclose(fp);
+    system("pause");
 
 }
