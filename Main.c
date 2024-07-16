@@ -101,6 +101,7 @@ int main(){
                 system("pause");
         }
     }while(ch!=5);
+
     return 0;
 }
 
@@ -395,6 +396,7 @@ void disphis(){
         printf("\t------------------------------------------------------------------------\n\n");
     }
     fclose(fp);
+    
     system("pause");
 
 
