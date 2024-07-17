@@ -409,7 +409,7 @@ void additem(char *file_name){
         printf("\t\tInput Item price: ");
         scanf("%d", &add.price);
         fflush(stdin);
-        fwrite(&add, sizeof(itemmenu), 1, fp);
+        fprintf(fp, "\n%d %s %.2f", add.id, add.pname, add.price);
         printf("\t\tDo you want to add more?(y/n)");
         scanf(" %c", &stop);
         if(stop=='n'||stop=='N'){
