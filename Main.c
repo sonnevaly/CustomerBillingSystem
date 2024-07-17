@@ -25,7 +25,7 @@ typedef struct {
 }orders;
 
 void menul(char *file_name);
-// void additem();
+void additem();
 void order();
 void disphis(); /*display history*/
 void searchhis();
@@ -49,9 +49,9 @@ int main(){
             case 1:
                 order();
                 break;
-            // case 2:
-            //     additem();
-            //     break;
+            case 2:
+                additem();
+                break;
             case 3:
                 system("cls");
                 printf("\n\t\t                            =======>Menu<=======                            \n");
@@ -365,6 +365,33 @@ void order() {
     system("pause");
 
 }
+
+void additem(){
+    system("cls");
+    itemmenu add;
+    FILE *fp;
+
+    printf("\n\t\t                                     =======>Add Item<=======                                     \n\n");
+    printf("\n\t\t__________________________________________________________________________________________________\n\n");
+
+    while (1)
+    {
+        fp = fopen("meal.txt", "a");
+        printf("Input Item ID: ");
+        scanf("%d", &add.id);
+        fflush(stdin);
+        printf("Input item name: ");
+        fgets(add.pname, sizeof(add.pname), stdin);
+        add.pname[strcspn(add.pname, "\n")] = 0;
+        printf("Input Item price: ");
+        scanf("%d", &add.price);
+        fflush(stdin);
+        fwrite(&add, sizeof(add), 1, fp);
+    }
+    
+}
+
+
 
 void disphis(){
     orders ord;
