@@ -50,7 +50,36 @@ int main(){
                 order();
                 break;
             case 2:
-                additem();
+                do
+                {
+                    char stops;
+                    system("cls");
+                    printf("\n\t\t                                     =======>Add Item<=======                                     \n");
+                    printf("\n\t\t__________________________________________________________________________________________________\n\n");
+                    printf("\t\tWhat do you want to add? (1) Meal\t(2) Drink\t(3) Desert\n\t\tInput your choice:");
+                    scanf("%d", &ch);
+                    fflush(stdin);
+                    switch (ch)
+                    {
+                    case 1:
+                        additem("meal.txt");
+                        break;
+                    case 2:
+                        additem("drink.txt");
+                        break;
+                    case 3:
+                        additem("desert.txt");
+                    default:
+                        break;
+                    }
+                    printf("\t\tDo you want to add other?(y/n)");
+                    scanf(" %c", &stops);
+                    if(stops=='n'||stops=='N'){
+                        break;
+                    }else if(stops=='y'||stops=='Y'){
+                        continue;
+                    }
+                } while (1);
                 break;
             case 3:
                 system("cls");
@@ -309,12 +338,7 @@ void order() {
                             break;
                         }else if(stop=='y'||stop=='Y'){
                             continue;
-                        }else{
-                            printf("\n\t\tNot valid!");
-                            printf("\n\t\tDo you like to order more?(y/n) ");
-                            scanf(" %c", &stop);
                         }
-                        
                     
                 }
                 break;
@@ -366,29 +390,36 @@ void order() {
 
 }
 
-void additem(){
+void additem(char *file_name){
     system("cls");
     itemmenu add;
     FILE *fp;
-
     printf("\n\t\t                                     =======>Add Item<=======                                     \n\n");
     printf("\n\t\t__________________________________________________________________________________________________\n\n");
-
+    fp = fopen(file_name, "a");
     while (1)
     {
-        fp = fopen("meal.txt", "a");
-        printf("Input Item ID: ");
+        char stop;
+        printf("\t\tInput Item ID: ");
         scanf("%d", &add.id);
         fflush(stdin);
-        printf("Input item name: ");
+        printf("\t\tInput item name: ");
         fgets(add.pname, sizeof(add.pname), stdin);
         add.pname[strcspn(add.pname, "\n")] = 0;
-        printf("Input Item price: ");
+        printf("\t\tInput Item price: ");
         scanf("%d", &add.price);
         fflush(stdin);
-        fwrite(&add, sizeof(add), 1, fp);
+        fwrite(&add, sizeof(itemmenu), 1, fp);
+        printf("\t\tDo you want to add more?(y/n)");
+        scanf(" %c", &stop);
+        if(stop=='n'||stop=='N'){
+            break;
+        }else if(stop=='y'||stop=='Y'){
+            continue;
+        }
+        
     }
-    
+    fclose(fp);
 }
 
 
