@@ -5,6 +5,7 @@ typedef struct {
     int id;
     char pname[50]; /*Product name*/
     float price;
+    // float discount;
 }itemmenu;
 
 typedef struct {
@@ -12,6 +13,7 @@ typedef struct {
     char pname[50]; /*Product name*/
     int quantity;
     float price;
+    // float discount;
 }itemorder;
 
 typedef struct {
@@ -19,9 +21,11 @@ typedef struct {
     char date[20];
     char phone[11];
     itemorder item[100];
-    int totalitm;
-    float total;
-    int itemcount;
+    int totalitm;  //Total item ordered
+    float total; //Total price
+    int itemcount; //To store how many time you order
+    char paymentmode[15]; //cash, credit card or wallet
+
 }orders;
 
 void menul(char *file_name);
@@ -39,7 +43,6 @@ int main(){
         printf("\t\t-------------------------------==============-------------------------------\n");
         printf("\t\t===============================  THE 3 SHOP  ===============================\n");
         printf("\t\t-------------------------------==============-------------------------------\n\n");
-        // printf("\t\t____________________________________________________________________________\n\n");
         printf("\t\t MainMenu:\n\n");
         printf("\t\t (1) Add Order\n\t\t (2) Add Item\n\t\t (3) Display Menu\n\t\t (4) History\n\t\t (5) Exit\n");
         printf("\n\t\t Enter your choice: "); 
@@ -424,6 +427,38 @@ void order() {
             continue;
         }
     }
+    while (1)
+    {
+        int ch; //Payment choice
+        printf("\t\tHow would you like to pay?\n\t\t(1) Cash\t(2) Credit Card\t(3) Wallet\n");
+        printf("\t\tInput your choice: ");
+        scanf("%d", &ch);
+        if (ch==1)
+        {
+            strncpy(ord.paymentmode, "Cash", sizeof(ord.paymentmode) - 1);
+            ord.paymentmode[sizeof(ord.paymentmode) - 1] = '\0';
+            break;
+        }else if (ch==2)
+        {
+            strncpy(ord.paymentmode, "Credit Card", sizeof(ord.paymentmode) - 1);
+            ord.paymentmode[sizeof(ord.paymentmode) - 1] = '\0';
+            break;
+        }else if (ch==3)
+        {
+            strncpy(ord.paymentmode, "Wallet", sizeof(ord.paymentmode) - 1);
+            ord.paymentmode[sizeof(ord.paymentmode) - 1] = '\0';
+            break;
+        }else
+        {
+            printf("\t\tNot valid! Please try again!\n\n");
+            system("pause");
+            continue;
+        }
+        
+    }
+    
+    
+    
 
     // Display receipt
     system("cls");
@@ -442,6 +477,7 @@ void order() {
     printf("\t\t--------------------------------------------------------\n");
     printf("\t\t%-30s %-15d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
     printf("\t\t%-45s  $%-5.2f\n", "Discounted(20%%):", ord.total * 0.8);
+    printf("\t\t%-35s  $%-15s\n", "PaymentMode:", ord.paymentmode);
     printf("\t\t========================================================\n");
 
     fwrite(&ord, sizeof(ord), 1, fp);
@@ -479,6 +515,7 @@ void disphis(){
         printf("\t\t--------------------------------------------------------\n");
         printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
         printf("\t\t%-45s  $%-5.2f\n","Discounted(20%%):", ord.total*0.8);
+        printf("\t\t%-35s  $%-15s\n", "PaymentMode:", ord.paymentmode);
         printf("\t\t========================================================\n\n");
         printf("\t------------------------------------------------------------------------\n\n");
     }
@@ -532,6 +569,7 @@ void searchhis(){
                 printf("\t\t--------------------------------------------------------\n");
                 printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
                 printf("\t\t%-45s  $%-5.2f\n","Discounted(20%%):", ord.total*0.8);
+                printf("\t\t%-35s  $%-15s\n", "PaymentMode:", ord.paymentmode);
                 printf("\t\t========================================================\n\n");
                 printf("\t\t--------------------------------------------------------\n\n");
                 found=1;  
