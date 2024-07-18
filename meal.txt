@@ -13,3 +13,4 @@
 13 Chicken_Burger 3 10
 14 Tuna_Rice_Ball 3 10
 15 Salmon_Rice_Ball 3.5 10
+16 Khor_KO_Noodle 2.50 10.00

@@ -11,3 +11,4 @@
 11 Caramel_Latte 2.75 10
 12 Ice_Lemon_Tea 1.5 10
 13 Peach_Tea 3 10
+14 Fresh_Orange_Juice 1.00 10.00
