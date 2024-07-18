@@ -514,23 +514,23 @@ void order() {
     // Display receipt
     system("cls");
     ord.itemcount = i;
-    printf("\t\t---------------------------------------------------------------------\n");
-    printf("\t\t                              Receipt\n");
-    printf("\t\t=====================================================================\n");
-    printf("\t\t%-20s %s\n", "Customer:", ord.name);
-    printf("\t\t%-20s %s\n", "Phone:", ord.phone);
-    printf("\t\t---------------------------------------------------------------------\n");
-    printf("\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
+    printf("\t\t\t\t---------------------------------------------------------------------\n");
+    printf("\t\t\t\t                              Receipt\n");
+    printf("\t\t\t\t=====================================================================\n");
+    printf("\t\t\t\t%-20s %s\n", "Customer:", ord.name);
+    printf("\t\t\t\t%-20s %s\n", "Phone:", ord.phone);
+    printf("\t\t\t\t---------------------------------------------------------------------\n");
+    printf("\t\t\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
     printf("\t\t---------------------------------------------------------------------\n");
     for (int j = 0; j < ord.itemcount; j++) {
-        printf("\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
+        printf("\t\t\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
     }
 
-    printf("\t\t---------------------------------------------------------------------\n");
-    printf("\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
-    printf("\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
-    printf("\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
-    printf("\t\t=====================================================================\n");
+    printf("\t\t\t\t---------------------------------------------------------------------\n");
+    printf("\t\t\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
+    printf("\t\t\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
+    printf("\t\t\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
+    printf("\t\t\t\t=====================================================================\n");
 
     fwrite(&ord, sizeof(ord), 1, fp);
     fclose(fp);
@@ -554,25 +554,25 @@ void disphis(){
     system("cls");
     while(fread(&ord, sizeof(orders), 1, fp))
     {
-        printf("\t\t---------------------------------------------------------------------\n");   
-        printf("\t\t                              Receipt %d\n", r_num);
+        printf("\t\t\t\t---------------------------------------------------------------------\n");   
+        printf("\t\t\t\t                              Receipt %d\n", r_num);
         r_num++;
-        printf("\t\t=====================================================================\n");
-        printf("\t\t%-20s %s\n", "Customer:", ord.name);
-        printf("\t\t%-20s %s\n", "Phone:", ord.phone);
-        printf("\t\t---------------------------------------------------------------------\n");
-        printf("\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
-        printf("\t\t---------------------------------------------------------------------\n");
+        printf("\t\t\t\t=====================================================================\n");
+        printf("\t\t\t\t%-20s %s\n", "Customer:", ord.name);
+        printf("\t\t\t\t%-20s %s\n", "Phone:", ord.phone);
+        printf("\t\t\t\t---------------------------------------------------------------------\n");
+        printf("\t\t\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
+        printf("\t\t\t\t---------------------------------------------------------------------\n");
         for (int j = 0; j < ord.itemcount; j++) {
-            printf("\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
+            printf("\t\t\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
         }
 
-        printf("\t\t---------------------------------------------------------------------\n");
-        printf("\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
-        printf("\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
-        printf("\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
-        printf("\t\t=====================================================================\n\n");
-        printf("-----------------------------------------------------------------------------------------------------\n");
+        printf("\t\t\t\t---------------------------------------------------------------------\n");
+        printf("\t\t\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
+        printf("\t\t\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
+        printf("\t\t\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
+        printf("\t\t\t\t=====================================================================\n\n");
+        printf("\t\t-----------------------------------------------------------------------------------------------------\n");
     }
     fclose(fp);
     
@@ -616,24 +616,24 @@ void searchhis(){
         {
             if (!strcmp(ord.phone, phone) || !strcmp(ord.name, name)) //If phone number or name match the receipt display it. If name or phone are same they will display. if user want to specify input both name and phone number
             {
-                printf("\t\t---------------------------------------------------------------------\n");
-                printf("\t\t                              Receipt %d\n", r_num);
-                printf("\t\t=====================================================================\n");
-                printf("\t\t%-20s %s\n", "Customer:", ord.name);
-                printf("\t\t%-20s %s\n", "Phone:", ord.phone);
-                printf("\t\t---------------------------------------------------------------------\n");
-                printf("\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
-                printf("\t\t---------------------------------------------------------------------\n");
+                printf("\t\t\t\t---------------------------------------------------------------------\n");   
+                printf("\t\t\t\t                              Receipt %d\n", r_num);
+                printf("\t\t\t\t=====================================================================\n");
+                printf("\t\t\t\t%-20s %s\n", "Customer:", ord.name);
+                printf("\t\t\t\t%-20s %s\n", "Phone:", ord.phone);
+                printf("\t\t\t\t---------------------------------------------------------------------\n");
+                printf("\t\t\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
+                printf("\t\t\t\t---------------------------------------------------------------------\n");
                 for (int j = 0; j < ord.itemcount; j++) {
-                    printf("\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
+                    printf("\t\t\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
                 }
 
-                printf("\t\t---------------------------------------------------------------------\n");
-                printf("\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
-                printf("\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
-                printf("\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
-                printf("\t\t=====================================================================\n\n");
-                printf("-----------------------------------------------------------------------------------------------------\n");
+                printf("\t\t\t\t---------------------------------------------------------------------\n");
+                printf("\t\t\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
+                printf("\t\t\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
+                printf("\t\t\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
+                printf("\t\t\t\t=====================================================================\n\n");
+                printf("\t\t-----------------------------------------------------------------------------------------------------\n");
                 found=1;  
                 break;
             }
