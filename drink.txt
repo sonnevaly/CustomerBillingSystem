@@ -1,3 +1,5 @@
 201 Cappucino 2
 202 Ice-latte 2
 203 hot-latte 2.5
+204 LemonTea 2.50
+205 LemonJuice 2.50

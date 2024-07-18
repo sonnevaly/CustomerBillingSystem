@@ -53,9 +53,6 @@ int main(){
                 do
                 {
                     char stops;
-                    system("cls");
-                    printf("\n\t\t                                     =======>Add Item<=======                                     \n");
-                    printf("\n\t\t__________________________________________________________________________________________________\n\n");
                     additem();
                     printf("\t\tDo you want to add other item?(y/n)");
                     scanf(" %c", &stops);
@@ -148,11 +145,13 @@ void menul(char *file_name){
 
 void additem() {
     system("cls");
+    printf("\n\t\t                                     =======>Add Item<=======                                     \n");
+    printf("\n\t\t__________________________________________________________________________________________________\n\n");
     itemmenu it;
     int n, option;
     FILE *fp = NULL;
 
-    printf("\n\t\tPlease choose the type of item to add:\n");
+    printf("\n\t\tPlease choose the type of item to add:\n\n");
     printf("\t\t(1) MEAL\n");
     printf("\t\t(2) DRINK\n");
     printf("\t\t(3) DESSERT\n");
@@ -162,6 +161,9 @@ void additem() {
 
     switch (option) {
         case 1:
+            system("cls");
+            printf("\n\t\t                                     =======>Add Item<=======                                     \n");
+            printf("\n\t\t__________________________________________________________________________________________________\n\n");
             fp = fopen("meal.txt", "a");
             if (fp == NULL) {
                 printf("Error opening file for meals.\n");
@@ -181,11 +183,14 @@ void additem() {
                 printf("\t\tPrice: ");
                 scanf("%f", &it.price);
                 getchar(); // To consume the newline character left by scanf
-                fprintf(fp, "%d %s %.2f\n", it.id, it.pname, it.price);
+                fprintf(fp, "\n%d %s %.2f", it.id, it.pname, it.price);
             }
             break;
 
         case 2:
+            system("cls");
+            printf("\n\t\t                                     =======>Add Item<=======                                     \n");
+            printf("\n\t\t__________________________________________________________________________________________________\n\n");
             fp = fopen("drink.txt", "a");
             if (fp == NULL) {
                 printf("Error opening file for drinks.\n");
@@ -205,11 +210,14 @@ void additem() {
                 printf("\t\tPrice: ");
                 scanf("%f", &it.price);
                 getchar(); // To consume the newline character left by scanf
-                fprintf(fp, "%d %s %.2f\n", it.id, it.pname, it.price);
+                fprintf(fp, "\n%d %s %.2f", it.id, it.pname, it.price);
             }
             break;
 
         case 3:
+            system("cls");
+            printf("\n\t\t                                     =======>Add Item<=======                                     \n");
+            printf("\n\t\t__________________________________________________________________________________________________\n\n");
             fp = fopen("desert.txt", "a");
             if (fp == NULL) {
                 printf("Error opening file for deserts.\n");
@@ -229,7 +237,7 @@ void additem() {
                 printf("\t\tPrice: ");
                 scanf("%f", &it.price);
                 getchar(); // To consume the newline character left by scanf
-                fprintf(fp, "%d %s %.2f\n", it.id, it.pname, it.price);
+                fprintf(fp, "\n%d %s %.2f", it.id, it.pname, it.price);
             }
             break;
 
@@ -243,38 +251,6 @@ void additem() {
 }
 
 
-/*void additem(char *file_name){
-    system("cls");
-    itemmenu add;
-    FILE *fp;
-    printf("\n\t\t                                     =======>Add Item<=======                                     \n\n");
-    printf("\n\t\t__________________________________________________________________________________________________\n\n");
-    fp = fopen(file_name, "a");
-    while (1)
-    {
-        char stop;
-        printf("\t\tInput Item ID: ");
-        scanf("%d", &add.id);
-        fflush(stdin);
-        printf("\t\tInput item name: ");
-        fgets(add.pname, sizeof(add.pname), stdin);
-        add.pname[strcspn(add.pname, "\n")] = 0;
-        printf("\t\tInput Item price: ");
-        scanf("%d", &add.price);
-        fflush(stdin);
-        fprintf(fp, "\n%d %s %.2f", add.id, add.pname, add.price);
-        printf("\t\tDo you want to add more?(y/n)");
-        scanf(" %c", &stop);
-        if(stop=='n'||stop=='N'){
-            break;
-        }else if(stop=='y'||stop=='Y'){
-            continue;
-        }
-        
-    }
-    fclose(fp);
-}
-*/
 void order() {
     system("cls");
     orders ord;
