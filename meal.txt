@@ -9,5 +9,6 @@
 109 Khor_Pork 1.50
 110 FishSoup 2.00
 111 Sachkrok 3.00
-112 Banana 0.00
-113 Apple 0.00114 Eggshuffle 3.50
+112 Banana 2.00
+113 Apple 1.00
+114 Eggshuffle 3.50
