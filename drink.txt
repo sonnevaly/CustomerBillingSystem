@@ -1,5 +1,13 @@
-201 Cappucino 2
-202 Ice-latte 2
-203 hot-latte 2.5
-204 LemonTea 2.50
-205 LemonJuice 2.50
+1 Latte 2.5 10
+2 Cappuccino 2.75 10
+3 Espresso 2 10
+4 Americano 1.75 10
+5 Mocha 2 10
+6 Matcha_Latte 2.75 10
+7 Strawberry_Matcha_Latte 3 10
+8 Vanilla_Latte 2.75 10
+9 Green_Tea_Oreo 3.25 10
+10 Chocolate 2.25 10
+11 Caramel_Latte 2.75 10
+12 Ice_Lemon_Tea 1.5 10
+13 Peach_Tea 3 10

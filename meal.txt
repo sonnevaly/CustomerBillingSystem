@@ -1,14 +1,15 @@
-101 Chicken_Sandwich 5.00
-102 Cheese_Burger 6.00
-103 Egg_Fried_Rice 3.00
-104 Japanese_Ramen 12.00
-105 Burrito 12.00
-106 Omelet 10.00
-107 Beefsteak 25.00
-108 LokLak_Beef	5.00
-109 Khor_Pork 1.50
-110 FishSoup 2.00
-111 Sachkrok 3.00
-112 Banana 2.00
-113 Apple 1.00
-114 Eggshuffle 3.50
+1 Chicken_Salsa_Salad 4.5 10
+2 Chicken_Sandwich 3 10
+3 Roasted_Beef_Sandwich 3.5 10
+4 Carbonara_Spaghetti 5 10
+5 Seafood_Tomyum spaghetti 4.5 10
+6 Seafood_Pizza 7 10
+7 Pepperoni_Pizza 6.5 10
+8 Deep_Fried_Chicken rice 2.75 10
+9 Spicy_Chicken rice 3.25 10
+10 Beef_Loklak rice 3 10
+11 Seafood_Fried rice 3.5 10
+12 French_Fries 3 10
+13 Chicken_Burger 3 10
+14 Tuna_Rice_Ball 3 10
+15 Salmon_Rice_Ball 3.5 10
