@@ -163,7 +163,7 @@ void menul(char *file_name){
 
 
 // Valy
-void order() {
+/*void order() {
     system("cls");
     orders ord;
     int i=0;
@@ -351,10 +351,6 @@ void order() {
             break;
         }else if(stop=='y'||stop=='Y'){
             continue;
-        }else{
-            printf("\n\t\tNot valid!");
-            printf("\n\t\tDo you like to order anything else?(y/n) ");
-            scanf(" %c", &stop);
         }
     }
 
@@ -376,6 +372,7 @@ void order() {
     
     printf("\t\t--------------------------------------------------------\n");
     printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
+    printf("\t\t%-45s  $%-5.2f\n","Discounted(20%%):", ord.total*0.8);
     printf("\t\t========================================================\n");
 
     fwrite(&ord, sizeof(ord), 1, fp);
@@ -388,7 +385,7 @@ void order() {
     printf("\n\n\t\t");
     system("pause");
 
-}
+}*/
 
 void additem(char *file_name){
     system("cls");
@@ -422,6 +419,203 @@ void additem(char *file_name){
     fclose(fp);
 }
 
+void order() {
+    system("cls");
+    orders ord;
+    int i = 0;
+    ord.totalitm = 0;
+    ord.total = 0;
+    FILE *fp = fopen("order.txt", "ab");
+
+    if (fp == NULL) {
+        printf("Error opening order file.\n");
+        return;
+    }
+
+    printf("\n\t\t                                   =======>PLEASE ORDER<=======                                   \n\n");
+    printf("\n\t\t__________________________________________________________________________________________________\n\n");
+
+    // Ask for the customer's name and phone number
+    printf("\n\n\t\tEnter your name: ");
+    fgets(ord.name, sizeof(ord.name), stdin);
+    ord.name[strcspn(ord.name, "\n")] = 0;
+
+    printf("\t\tEnter your phone number: ");
+    fgets(ord.phone, sizeof(ord.phone), stdin);
+    ord.phone[strcspn(ord.phone, "\n")] = 0;
+
+    while (1) {
+        itemmenu temp; //To store data temporarily
+        system("cls");
+        char stop;
+        int menu;
+        printf("\n\t\t                                   =======>PLEASE ORDER<=======                                   ");
+        printf("\n\t\t__________________________________________________________________________________________________\n\n");
+        printf("\n\t\tWhat would you like to order?");
+        printf("\n\t\t(1) MEAL\t(2) DRINK\t(3) DESSERT\n");
+        printf("\t\tChoose Menu to order: ");
+        scanf("%d", &menu);
+
+        switch (menu) {
+            case 1:
+                printf("\n\t\t                                   /MEAL/                                   \n");
+                menul("meal.txt");
+                while (1) {
+                    int found = 0;
+                    char buffer[200];
+                    printf("\n\t\tEnter ID to order: ");
+                    scanf("%d", &ord.item[i].id);
+                    FILE *fp1 = fopen("meal.txt", "r");
+                    while (!feof(fp1)) {
+                        fgets(buffer, 200, fp1);
+                        sscanf(buffer, "%d %s %f", &temp.id, temp.pname, &temp.price);
+                        if (temp.id == ord.item[i].id) {
+                            strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
+                            ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
+                            ord.item[i].price = temp.price;
+                            found = 1;
+                            break;
+                        }
+                    }
+                    fclose(fp1);
+                    if (!found) {
+                        printf("\n\t\tThis is not existed!");
+                        continue;
+                    }
+                    printf("\n\t\tHow many would you like: ");
+                    scanf("%d", &ord.item[i].quantity);
+
+                    ord.totalitm += ord.item[i].quantity;
+                    ord.total += ord.item[i].quantity * ord.item[i].price;
+                    i++;
+                    printf("\n\t\tDo you like to order more?(y/n) ");
+                    scanf(" %c", &stop);
+                    if (stop == 'n' || stop == 'N') {
+                        break;
+                    } else if (stop == 'y' || stop == 'Y') {
+                        continue;
+                    } else {
+                        printf("\n\t\tNot valid!");
+                        printf("\n\t\tDo you like to order more?(y/n) ");
+                        scanf(" %c", &stop);
+                    }
+                }
+                break;
+            case 2:
+                printf("\n\t\t                                   /DRINK/                                   \n");
+                menul("drink.txt");
+                while (1) {
+                    int found = 0;
+                    char buffer[200];
+                    printf("\n\t\tEnter ID to order: ");
+                    scanf("%d", &ord.item[i].id);
+                    FILE *fp2 = fopen("drink.txt", "r");
+                    while (!feof(fp2)) {
+                        fgets(buffer, 200, fp2);
+                        sscanf(buffer, "%d %s %f", &temp.id, temp.pname, &temp.price);
+                        if (temp.id == ord.item[i].id) {
+                            strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
+                            ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
+                            ord.item[i].price = temp.price;
+                            found = 1;
+                        }
+                    }
+                    fclose(fp2);
+                    if (!found) {
+                        printf("\n\t\tThis is not existed!");
+                        continue;
+                    }
+                    printf("\n\t\tHow many would you like: ");
+                    scanf("%d", &ord.item[i].quantity);
+                    ord.totalitm += ord.item[i].quantity;
+                    ord.total += ord.item[i].quantity * ord.item[i].price;
+                    i++;
+                    printf("\n\t\tDo you like to order more?(y/n) ");
+                    scanf(" %c", &stop);
+                    if (stop == 'n' || stop == 'N') {
+                        break;
+                    } else if (stop == 'y' || stop == 'Y') {
+                        continue;
+                    } else {
+                        printf("\n\t\tNot valid!");
+                        printf("\n\t\tDo you like to order more?(y/n) ");
+                        scanf(" %c", &stop);
+                    }
+                }
+                break;
+            case 3:
+                printf("\n\t\t                                  /DESSERT/                                  \n");
+                menul("dessert.txt");
+                while (1) {
+                    int found = 0;
+                    char buffer[200];
+                    printf("\n\t\tEnter ID to order: ");
+                    scanf("%d", &ord.item[i].id);
+                    FILE *fp3 = fopen("dessert.txt", "r");
+                    while (!feof(fp3)) {
+                        fgets(buffer, 200, fp3);
+                        sscanf(buffer, "%d %s %f", &temp.id, temp.pname, &temp.price);
+                        if (temp.id == ord.item[i].id) {
+                            strncpy(ord.item[i].pname, temp.pname, sizeof(ord.item[i].pname) - 1);
+                            ord.item[i].pname[sizeof(ord.item[i].pname) - 1] = '\0';
+                            ord.item[i].price = temp.price;
+                            found = 1;
+                        }
+                    }
+                    fclose(fp3);
+                    if (!found) {
+                        printf("\n\t\tThis is not existed!");
+                        continue;
+                    }
+                    printf("\n\t\tHow many would you like: ");
+                    scanf("%d", &ord.item[i].quantity);
+                    ord.totalitm += ord.item[i].quantity;
+                    ord.total += ord.item[i].quantity * ord.item[i].price;
+                    i++;
+                    printf("\n\t\tDo you like to order more?(y/n) ");
+                    scanf(" %c", &stop);
+                    if (stop == 'n' || stop == 'N') {
+                        break;
+                    } else if (stop == 'y' || stop == 'Y') {
+                        continue;
+                    }
+                }
+                break;
+            default:
+                continue;
+        }
+        printf("\n\t\tDo you like to order anything else?(y/n) ");
+        scanf(" %c", &stop);
+        if (stop == 'n' || stop == 'N') {
+            break;
+        } else if (stop == 'y' || stop == 'Y') {
+            continue;
+        }
+    }
+
+    // Display receipt
+    system("cls");
+    ord.itemcount = i;
+    printf("\n\t\tReceipt\n");
+    printf("\t\t========================================================\n");
+    printf("\t\t%-20s %s\n", "Customer:", ord.name);
+    printf("\t\t%-20s %s\n", "Phone:", ord.phone);
+    printf("\t\t--------------------------------------------------------\n");
+    printf("\t\t%-30s %-15s %-5s\n", "Item_Name", "Quantity", "Price");
+    printf("\t\t--------------------------------------------------------\n");
+    for (int j = 0; j < ord.itemcount; j++) {
+        printf("\t\t%-30s %-15d $%-5.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].price);
+    }
+
+    printf("\t\t--------------------------------------------------------\n");
+    printf("\t\t%-30s %-15d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
+    printf("\t\t%-45s  $%-5.2f\n", "Discounted(20%%):", ord.total * 0.8);
+    printf("\t\t========================================================\n");
+
+    fwrite(&ord, sizeof(ord), 1, fp);
+    fclose(fp);
+}
+
 
 //bn
 void disphis(){
@@ -450,6 +644,7 @@ void disphis(){
         
         printf("\t\t--------------------------------------------------------\n");
         printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
+        printf("\t\t%-45s  $%-5.2f\n","Discounted(20%%):", ord.total*0.8);
         printf("\t\t========================================================\n\n");
         printf("\t------------------------------------------------------------------------\n\n");
     }
@@ -502,6 +697,7 @@ void searchhis(){
                 
                 printf("\t\t--------------------------------------------------------\n");
                 printf("\t\t%-30s %-15d $%-5.2f\n","Total:", ord.totalitm, ord.total);
+                printf("\t\t%-45s  $%-5.2f\n","Discounted(20%%):", ord.total*0.8);
                 printf("\t\t========================================================\n\n");
                 printf("\t\t--------------------------------------------------------\n\n");
                 found=1;  
