@@ -521,7 +521,7 @@ void order() {
     printf("\t\t\t\t%-20s %s\n", "Phone:", ord.phone);
     printf("\t\t\t\t---------------------------------------------------------------------\n");
     printf("\t\t\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
-    printf("\t\t---------------------------------------------------------------------\n");
+    printf("\t\t\t\t---------------------------------------------------------------------\n");
     for (int j = 0; j < ord.itemcount; j++) {
         printf("\t\t\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
     }
@@ -543,6 +543,7 @@ void order() {
 void disphis(){
     orders ord;   //Structure to store receipt from file
     int r_num=1;  //Receipt Number
+    int found=0;
     FILE *fp;
     fp=fopen("order.txt", "rb");
     if (fp == NULL) {
@@ -573,6 +574,11 @@ void disphis(){
         printf("\t\t\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
         printf("\t\t\t\t=====================================================================\n\n");
         printf("\t\t-----------------------------------------------------------------------------------------------------\n");
+        found=1;
+    }
+    if (!found)
+    {
+        printf("Not existed!\n");
     }
     fclose(fp);
     
