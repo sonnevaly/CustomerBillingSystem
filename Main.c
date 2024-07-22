@@ -543,11 +543,23 @@ void order() {
 void disphis(){
     orders ord;   //Structure to store receipt from file
     int r_num=1;  //Receipt Number
-    int found=0;
     FILE *fp;
     fp=fopen("order.txt", "rb");
     if (fp == NULL) {
         printf("Error opening order file.\n");
+        return;
+    }
+
+
+    fseek(fp, 0, SEEK_END);
+    long file_size = ftell(fp);
+    fseek(fp, 0, SEEK_SET); // Reset file pointer to the beginning
+
+    if (file_size == 0) {
+        system("cls");
+        printf("\t\tNo history existed!\n\t\t");
+        system("pause");
+        fclose(fp);
         return;
     }
 
@@ -574,12 +586,8 @@ void disphis(){
         printf("\t\t\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
         printf("\t\t\t\t=====================================================================\n\n");
         printf("\t\t-----------------------------------------------------------------------------------------------------\n");
-        found=1;
     }
-    if (!found)
-    {
-        printf("Not existed!\n");
-    }
+
     fclose(fp);
     
     system("pause");
@@ -651,7 +659,8 @@ void searchhis(){
         
         if (!found)
         {
-            printf("Not existed!\n");
+            system("cls");
+            printf("\t\tNot existed!\n\t\t");
             system("pause");
             break;
         }
