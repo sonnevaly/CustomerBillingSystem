@@ -1,4 +1,27 @@
-301 SUNDAY_BOMB 7
-302 RED_VELVET 6.25
-303 CHEESE_CAKE 5
-304 BorborCorn 1.50
+1 Chocolate_Cake 3.5 10
+2 Oreo_Mochi 2 10
+3 Vanilla_Ice_Cream 1.5 10
+4 Caramel_Cake 1.75 10
+5 Chocolate_Waffle 2 10
+6 Boba_Soufflé 2.75 10
+7 Matcha_Cake 3 10
+8 Macaroon 4 10
+9 Panna_Cotta 3.5 10
+10 Nutella_Toast 2.75 10
+11 Fruit_Tart 1.25 10
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+12 Egg_Tart 1 10
+=======
+12 Egg_Tart 1 10
+13 Corn_Porigde 1.50 10.00
+>>>>>>> 38c9f9bf1c759c4905597a29f99c7421e4453632
+=======
+12 Egg_Tart 1 10
+13 Corn_Porigde 1.50 10.00
+>>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+12 Egg_Tart 1 10
+13 Corn_Porigde 1.50 10.00
+>>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
