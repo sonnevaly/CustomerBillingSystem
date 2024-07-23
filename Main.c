@@ -206,6 +206,7 @@ void additem(int *found) {
                 scanf("%f", &it.price);
                 getchar(); // To consume the newline character left by scanf
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                 printf("\t\tPrice: ");
 
@@ -217,6 +218,9 @@ void additem(int *found) {
 =======
                 printf("\t\tDiscount: ");
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+                printf("\t\tDiscount: ");
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
                 scanf("%f", &it.discount);
                 getchar(); // To consume the newline character left by scanf
                 fprintf(fp, "\n%d %s %.2f %.2f", it.id, it.pname, it.price, it.discount);
@@ -248,11 +252,14 @@ void additem(int *found) {
                 getchar(); 
                 printf("\t\tDiscount: ");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                 printf("\t\tDiscount: ");
 
 =======
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
                 scanf("%f", &it.discount);
                 getchar(); // To consume the newline character left by scanf
                 fprintf(fp, "\n%d %s %.2f %.2f", it.id, it.pname, it.price, it.discount);
@@ -283,6 +290,7 @@ void additem(int *found) {
                 scanf("%f", &it.price);
                 getchar();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                 printf("\t\tDiscount: ");
 
@@ -291,6 +299,9 @@ void additem(int *found) {
 =======
                 printf("\t\tDiscount: ");
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+                printf("\t\tDiscount: ");
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
                 scanf("%f", &it.discount);
                 getchar(); // To consume the newline character left by scanf
                 fprintf(fp, "\n%d %s %.2f %.2f", it.id, it.pname, it.price, it.discount);
@@ -507,6 +518,7 @@ void order() {
         system("cls");
         int ch; //Payment choice
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         printf("\t\tHow would you like to pay?\n\t\t(1) Cash\t(2) Credit_Card\t(3) Wallet\n");
 
@@ -517,6 +529,9 @@ void order() {
 =======
         printf("\t\tHow would you like to pay?\n\t\t(1) Cash \t(2) Credit_Card \t(3) Wallet\n");
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+        printf("\t\tHow would you like to pay?\n\t\t(1) Cash \t(2) Credit_Card \t(3) Wallet\n");
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
         printf("\t\tInput your choice: ");
         scanf("%d", &ch);
         if (ch==1)
@@ -549,6 +564,7 @@ void order() {
     // Display receipt
     system("cls");
     ord.itemcount = i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     printf("\n\t\t                              Receipt\n");
@@ -611,15 +627,32 @@ void order() {
     }
 
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+    printf("\t\t\t\t---------------------------------------------------------------------\n");
+    printf("\t\t\t\t                              Receipt\n");
+    printf("\t\t\t\t=====================================================================\n");
+    printf("\t\t\t\t%-20s %s\n", "Customer:", ord.name);
+    printf("\t\t\t\t%-20s %s\n", "Phone:", ord.phone);
+    printf("\t\t\t\t---------------------------------------------------------------------\n");
+    printf("\t\t\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
+    printf("\t\t\t\t---------------------------------------------------------------------\n");
+    for (int j = 0; j < ord.itemcount; j++) {
+        printf("\t\t\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
+    }
+
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
     printf("\t\t\t\t---------------------------------------------------------------------\n");
     printf("\t\t\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
     printf("\t\t\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
     printf("\t\t\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
     printf("\t\t\t\t=====================================================================\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
 
     fwrite(&ord, sizeof(ord), 1, fp);
     fclose(fp);
@@ -639,6 +672,7 @@ void disphis(){
         return;
     }
 
+<<<<<<< HEAD
     //Display receipt
     system("cls");
 <<<<<<< HEAD
@@ -725,7 +759,46 @@ void disphis(){
 
 =======
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+
+    fseek(fp, 0, SEEK_END);
+    long file_size = ftell(fp);
+    fseek(fp, 0, SEEK_SET); // Reset file pointer to the beginning
+
+    if (file_size == 0) {
+        system("cls");
+        printf("\t\tNo history existed!\n\t\t");
+        system("pause");
+        fclose(fp);
+        return;
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
     }
+
+    //Display receipt
+    system("cls");
+    while(fread(&ord, sizeof(orders), 1, fp))
+    {
+        printf("\t\t\t\t---------------------------------------------------------------------\n");   
+        printf("\t\t\t\t                              Receipt %d\n", r_num);
+        r_num++;
+        printf("\t\t\t\t=====================================================================\n");
+        printf("\t\t\t\t%-20s %s\n", "Customer:", ord.name);
+        printf("\t\t\t\t%-20s %s\n", "Phone:", ord.phone);
+        printf("\t\t\t\t---------------------------------------------------------------------\n");
+        printf("\t\t\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
+        printf("\t\t\t\t---------------------------------------------------------------------\n");
+        for (int j = 0; j < ord.itemcount; j++) {
+            printf("\t\t\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
+        }
+
+        printf("\t\t\t\t---------------------------------------------------------------------\n");
+        printf("\t\t\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
+        printf("\t\t\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
+        printf("\t\t\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
+        printf("\t\t\t\t=====================================================================\n\n");
+        printf("\t\t-----------------------------------------------------------------------------------------------------\n\n");
+    }
+
     fclose(fp);
     
     system("pause");
@@ -768,6 +841,7 @@ void searchhis(){
         {
             if (!strcmp(ord.phone, phone) || !strcmp(ord.name, name)) //If phone number or name match the receipt display it. If name or phone are same they will display. if user want to specify input both name and phone number
             {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
                 printf("\n\t\t                              Receipt %d\n", r_num);
@@ -832,6 +906,20 @@ void searchhis(){
                 }
 
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+                printf("\t\t\t\t---------------------------------------------------------------------\n");   
+                printf("\t\t\t\t                              Receipt %d\n", r_num);
+                printf("\t\t\t\t=====================================================================\n");
+                printf("\t\t\t\t%-20s %s\n", "Customer:", ord.name);
+                printf("\t\t\t\t%-20s %s\n", "Phone:", ord.phone);
+                printf("\t\t\t\t---------------------------------------------------------------------\n");
+                printf("\t\t\t\t%-30s %-15s %-7s  %-5s\n", "Item_Name", "Quantity", "Disc", "Price");
+                printf("\t\t\t\t---------------------------------------------------------------------\n");
+                for (int j = 0; j < ord.itemcount; j++) {
+                    printf("\t\t\t\t%-30s %-15d %-5.2f %%  $%-7.2f\n", ord.item[j].pname, ord.item[j].quantity, ord.item[j].discount, ord.item[j].price);
+                }
+
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
                 printf("\t\t\t\t---------------------------------------------------------------------\n");
                 printf("\t\t\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
                 printf("\t\t\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
@@ -839,11 +927,15 @@ void searchhis(){
                 printf("\t\t\t\t=====================================================================\n\n");
                 printf("\t\t-----------------------------------------------------------------------------------------------------\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                 int found=1;  
 =======
                 found=1;  
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+                found=1;  
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
                 break;
             }
             r_num++;
@@ -852,12 +944,17 @@ void searchhis(){
 
         //To check for Receipt Existence
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+        
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
         if (!found)
         {
-            printf("Not existed!\n");
+            system("cls");
+            printf("\t\tNot existed!\n\t\t");
             system("pause");
             break;
         }

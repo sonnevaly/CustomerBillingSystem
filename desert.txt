@@ -12,6 +12,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 12 Egg_Tart 1 10
 =======
 12 Egg_Tart 1 10
@@ -25,3 +26,7 @@
 12 Egg_Tart 1 10
 13 Corn_Porigde 1.50 10.00
 >>>>>>> b8db25a90eb8a699e46e0c50e9ba0395ae53ba05
+=======
+12 Egg_Tart 1 10
+13 Corn_Porigde 1.50 10.00
+>>>>>>> d0d5491e554b7f000081ce650238ac4218e07c7c
