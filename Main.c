@@ -579,7 +579,7 @@ void order() {
     }
 
     printf("\t\t---------------------------------------------------------------------\n");
-    printf("\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
+    p rintf("\t\t%-30s %-24d $%-5.2f\n", "Total:", ord.totalitm, ord.total);
     printf("\t\t%-55s $%-5.2f\n", "Discounted:", ord.discounted);
     printf("\t\t%-55s %-15s\n", "PaymentMode:", ord.paymentmode);
 
