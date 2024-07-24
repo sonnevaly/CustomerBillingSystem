@@ -346,6 +346,7 @@ void order() {
                             ord.item[i].discount = temp.discount;
                             found = 1;
                             break;
+                        
                         }
                     }
                     fclose(fp1);
